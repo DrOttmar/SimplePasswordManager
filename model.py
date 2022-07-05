@@ -15,6 +15,9 @@ class PasswordContainer:
     password_database = {}
 
     def __init__(self):
+
+        self._init_dirs()
+
         if "fernet.pickle" not in os.listdir("env"):
             key = Fernet.generate_key()
             with open(r"env\fernet.pickle", "wb") as pic:
@@ -115,3 +118,9 @@ class PasswordContainer:
                 encrypted_string = self._encrypt_credentials([acc, user, pawo])
 
                 db.write(encrypted_string + b"\n")
+
+    def _init_dirs(self):
+        if "db" not in os.listdir():
+            os.mkdir("db")
+        if "env" not in os.listdir():
+            os.mkdir("env")
