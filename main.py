@@ -1,7 +1,7 @@
 import time
 import sys
 
-from Model import PasswordContainer
+from model import PasswordContainer
 
 
 def main():
