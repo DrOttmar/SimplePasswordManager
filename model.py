@@ -1,6 +1,7 @@
 import os
 import pickle
 import collections
+import pwinput
 
 from cryptography.fernet import Fernet
 
@@ -42,7 +43,10 @@ class PasswordContainer:
 
     # Authentication
     def authenticate(self):
-        user_input = input("Enter password: ")
+        # pwinput does not work in PyCharm Terminal, for debugging purpose comment out the following line
+        user_input = pwinput.pwinput(mask='*')
+        # for debugging purpose comment in the following line
+        # user_input = input("password: ")
         return user_input == self._get_secret_env()
 
     # Init
