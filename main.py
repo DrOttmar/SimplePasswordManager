@@ -6,6 +6,12 @@ from model import PasswordContainer
 
 def main():
     instance = PasswordContainer()
+
+    if not instance.authenticate():
+        print("Invalid password. Bye")
+        time.sleep(1)
+        sys.exit()
+
     while True:
         print("\nChoose an option:")
         print("1: Show all accounts.")

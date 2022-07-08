@@ -40,6 +40,11 @@ class PasswordContainer:
 
         self.import_passwords()
 
+    # Authentication
+    def authenticate(self):
+        user_input = input("Enter password: ")
+        return user_input == self._get_secret_env()
+
     # Init
     def import_passwords(self):
         with open(r"db\database.txt", "rb") as pws:
@@ -99,6 +104,12 @@ class PasswordContainer:
                 encrypted_string += SEPARATOR
 
         return self.fernet_object.encrypt(encrypted_string.encode())
+
+    def _get_secret_env(self):
+        with open("env\secret.env", "r") as env:
+            content = env.read()
+            return self.fernet_object.decrypt(content.encode()).decode()
+
 
     def _reorder_passwords(self):
         if len(self.password_database) <= 1:
